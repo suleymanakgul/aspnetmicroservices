@@ -44,7 +44,7 @@ namespace Discount.API.Repositories
 
             if (coupon == null)
             {
-                return new Coupon();
+                coupon = new Coupon { ProductName = productName };
             }
 
             return coupon;

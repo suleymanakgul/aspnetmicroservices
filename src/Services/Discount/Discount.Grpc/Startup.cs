@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Discount.Grpc.Mapper;
 using Discount.Grpc.Repositories;
 using Discount.Grpc.Services;
 using Microsoft.AspNetCore.Builder;
@@ -21,7 +22,14 @@ namespace Discount.Grpc
         {
             services.AddGrpc();
             services.AddScoped<IDiscountRepository, DiscountRepository>();
-            services.AddSingleton<IMapper, AutoMapper.Mapper>();
+
+            var mapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new DiscountProfile());
+            });
+
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

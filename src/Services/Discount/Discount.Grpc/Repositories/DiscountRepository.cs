@@ -44,7 +44,7 @@ namespace Discount.Grpc.Repositories
 
             if (coupon == null)
             {
-                return new Coupon();
+                coupon = new Coupon { ProductName = productName };
             }
 
             return coupon;
